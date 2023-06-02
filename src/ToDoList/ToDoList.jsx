@@ -1,28 +1,29 @@
 import { Column } from "../Column/Column.jsx";
-import './styles.css';
 import { useMemo, useState } from 'react';
+import {AddTaskInput} from "../AddTasksInput/AddTasksInput.jsx";
+import * as styles from './styles.module.css';
 
-const TaskStatusEnum = {
+export const TaskStatusEnum = {
     ToDo: 'ToDo',
     Doing: 'Doing',
     Done: 'Done',
 }
 
-const tasksArray = [
+const initialTasks = [
     {
+        id: 1,
         title: "Wash the dishes",
         status: TaskStatusEnum.ToDo,
     },
     {
+        id: 2,
         title: "Throw away the trash",
         status: TaskStatusEnum.Doing,
     }
 ]
 
 export function ToDoList() {
-    // const useState all tasks
-
-    // handle add task
+    const [tasksArray, setTasksArray] = useState(initialTasks)
 
     const {toDo, doing, done} = useMemo(() => {
         const toDo = [];
@@ -40,15 +41,15 @@ export function ToDoList() {
                 done.push(task)
             }
         })
-
         return {toDo, doing, done}
     }, [tasksArray])
 
     return (
         <div>
-            <AddTaskInput />
+            <h1 className={styles.title}>To Do List</h1>
+            <AddTaskInput tasksArray={tasksArray} setTasksArray={setTasksArray}/>
             <br />
-            <div className="toDoList">
+            <div className={styles.toDoList}>
                 <Column title="To Do" tasks={toDo}/>
                 <Column title="Doing" tasks={doing}/>
                 <Column title="Done" tasks={done}/>
@@ -56,26 +57,3 @@ export function ToDoList() {
         </div>
     )
 }
-
-function AddTaskInput() {
-
-    function AddTask() {
-        
-    }
-
-    return (
-        <div>
-            <label for="task">Enter Task</label>
-            <br />
-            <input />
-            <button>Add</button>
-        </div>
-    )
-}
-
-// finalnie bedziesz musiał integrować się z API - json server
-// moveLeft / moveRight
-// createTask
-// deleteTask
-// editTask (mniejszy priorytet)
-// ostylować to sensownie

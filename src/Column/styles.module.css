@@ -1,0 +1,13 @@
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    min-height: 300px;
+    background: gray;
+}
+
+.buttonBar {
+    display: flex;
+    flex-direction: row;
+}
