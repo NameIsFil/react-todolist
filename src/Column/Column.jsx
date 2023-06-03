@@ -8,29 +8,48 @@ export function Column(props) {
     function moveRight(task) {
         if(task.status === TaskStatusEnum.ToDo) {
             task.status = TaskStatusEnum.Doing;
+            setTasksArrayHelper(task, props)
             return;
         }
         if(task.status === TaskStatusEnum.Doing) {
             task.status = TaskStatusEnum.Done;
+            setTasksArrayHelper(task, props)
             return;
         }
         if(task.status === TaskStatusEnum.Done) {
+            setTasksArrayHelper(task, props)
             return;
         }
     }
 
     function moveLeft(task) {
         if(task.status === TaskStatusEnum.ToDo) {
+            setTasksArrayHelper(task, props)
             return;
         }
         if(task.status === TaskStatusEnum.Doing) {
             task.status = TaskStatusEnum.ToDo;
+            setTasksArrayHelper(task, props)
             return;
         }
         if(task.status === TaskStatusEnum.Done) {
             task.status = TaskStatusEnum.Doing;
+            setTasksArrayHelper(task, props)
             return;
         }
+    }
+
+    function setTasksArrayHelper(task, props) {
+        let newArray;
+        let tasksArray = props.tasksArray;
+        tasksArray.forEach((taskFromArray) => {
+            if (task.id === taskFromArray.id) {
+                taskFromArray.status = task.status;
+                newArray = tasksArray.slice()
+                props.setTasksArray(newArray);
+                return;
+            }
+        })
     }
 
     return (

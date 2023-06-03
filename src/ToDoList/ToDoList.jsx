@@ -50,9 +50,9 @@ export function ToDoList() {
             <AddTaskInput tasksArray={tasksArray} setTasksArray={setTasksArray}/>
             <br />
             <div className={styles.toDoList}>
-                <Column title="To Do" tasks={toDo}/>
-                <Column title="Doing" tasks={doing}/>
-                <Column title="Done" tasks={done}/>
+                <Column tasksArray={tasksArray} setTasksArray={setTasksArray} title="To Do" tasks={toDo}/>
+                <Column tasksArray={tasksArray} setTasksArray={setTasksArray} title="Doing" tasks={doing}/>
+                <Column tasksArray={tasksArray} setTasksArray={setTasksArray} title="Done" tasks={done}/>
             </div>
         </div>
     )
