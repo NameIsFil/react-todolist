@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Throw away the trash",
+      "status": "TaskStatusEnum.ToDo"
+    },
+    {
+      "id": 2,
+      "title": "Wash the dishes",
+      "status": "TaskStatusEnum.Doing"
+    }
+  ]
+}

@@ -3,6 +3,30 @@ import { useMemo, useState } from 'react';
 import {AddTaskInput} from "../AddTasksInput/AddTasksInput.jsx";
 import * as styles from './styles.module.css';
 
+
+async function fetchTasks() {
+    const postResponse = await fetch(
+        `http://localhost:3000/tasks`
+    );
+    const tasksData = await postResponse.json();
+    console.log(tasksData);
+}
+
+async function addTaskToJson(taskCard) {
+    const dataToSend = JSON.stringify(taskCard);
+    try {
+        const response = await fetch(`http://localhost:3000/tasks`, {
+            method: "POST",
+            body: dataToSend
+        });
+        console.log("The task was added");
+    } catch (error) {
+        console.log('Failed to add', error);
+    }
+}
+
+
+
 export const TaskStatusEnum = {
     ToDo: 'ToDo',
     Doing: 'Doing',
@@ -41,6 +65,7 @@ export function ToDoList() {
                 done.push(task)
             }
         })
+        fetchTasks();
         return {toDo, doing, done}
     }, [tasksArray])
 

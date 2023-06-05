@@ -1,9 +1,19 @@
 import * as styles from './styles.module.css';
 import {TaskStatusEnum} from "../ToDoList/ToDoList.jsx";
-import {ToDoList} from "../ToDoList/ToDoList.jsx";
 
 export function Column(props) {
     const title = props.title;
+
+    function deleteTask(task) {
+        const tasksArray = props.tasksArray;
+        tasksArray.forEach((taskFromArray, index) => {
+            if (task.id === taskFromArray.id) {
+                tasksArray.splice(index, 1);
+                props.setTasksArray([...tasksArray]);
+                return;
+            }
+        })
+    }
 
     function moveRight(task) {
         if(task.status === TaskStatusEnum.ToDo) {
@@ -62,6 +72,7 @@ export function Column(props) {
                             {task.title}
                             <div className={styles.buttonBar}>
                                 <button onClick={() => moveLeft(task)}>Move Left</button>
+                                <button onClick={() => deleteTask(task)}>Delete</button>
                                 <button onClick={() => moveRight(task)}>Move Right</button>
                             </div>
                         </div>
