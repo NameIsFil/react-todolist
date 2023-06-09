@@ -1,5 +1,5 @@
 import * as styles from './styles.module.css';
-import {TaskStatusEnum} from "../ToDoList/ToDoList.jsx";
+import { Link } from "react-router-dom";
 
 export function Column(props) {
     const title = props.title;
@@ -16,34 +16,35 @@ export function Column(props) {
     }
 
     function moveRight(task) {
-        if(task.status === TaskStatusEnum.ToDo) {
-            task.status = TaskStatusEnum.Doing;
+
+        if(task.status === "ToDo") {
+            task.status = "Doing";
             setTasksArrayHelper(task, props)
             return;
         }
-        if(task.status === TaskStatusEnum.Doing) {
-            task.status = TaskStatusEnum.Done;
+        if(task.status === "Doing") {
+            task.status = "Done";
             setTasksArrayHelper(task, props)
             return;
         }
-        if(task.status === TaskStatusEnum.Done) {
+        if(task.status === "Done") {
             setTasksArrayHelper(task, props)
             return;
         }
     }
 
     function moveLeft(task) {
-        if(task.status === TaskStatusEnum.ToDo) {
+        if(task.status === "ToDo") {
             setTasksArrayHelper(task, props)
             return;
         }
-        if(task.status === TaskStatusEnum.Doing) {
-            task.status = TaskStatusEnum.ToDo;
+        if(task.status === "Doing") {
+            task.status = "ToDo";
             setTasksArrayHelper(task, props)
             return;
         }
-        if(task.status === TaskStatusEnum.Done) {
-            task.status = TaskStatusEnum.Doing;
+        if(task.status === "Done") {
+            task.status = "Doing";
             setTasksArrayHelper(task, props)
             return;
         }
@@ -74,6 +75,7 @@ export function Column(props) {
                                 <button onClick={() => moveLeft(task)}>Move Left</button>
                                 <button onClick={() => deleteTask(task)}>Delete</button>
                                 <button onClick={() => moveRight(task)}>Move Right</button>
+                                <Link to={`/details/${task.id}`}>go to details</Link>
                             </div>
                         </div>
                     )

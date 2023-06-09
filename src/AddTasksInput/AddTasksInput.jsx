@@ -1,15 +1,33 @@
 import { useState } from 'react';
-import { TaskStatusEnum } from "../ToDoList/ToDoList.jsx";
 import * as styles from './styles.module.css';
 
 export function AddTaskInput(props) {
     const [inputValue, setInputValue] = useState(null)
-    function handleAdd() {
-        props.setTasksArray([...props.tasksArray, {
-            id: props.tasksArray.length + 1,
-            title: inputValue,
-            status: TaskStatusEnum.ToDo,
-        }])
+
+    // function handleAdd() {
+    //     props.setTasksArray([...props.tasksArray, {
+    //         id: props.tasksArray.length + 1,
+    //         title: inputValue,
+    //         status: "ToDo",
+    //     }])
+    // }
+
+    async function addTaskToJson() {
+        try {
+            let taskData = JSON.stringify({
+                id: props.tasksArray.length + 1,
+                title: inputValue,
+                status: "ToDo",
+            })
+            const response = await fetch(`http://localhost:3000/tasks`, {
+                method: "POST",
+                body: taskData,
+            });
+            console.log(taskData);
+            console.log("The task was added");
+        } catch (error) {
+            console.log('Failed to add', error);
+        }
     }
 
     function handleInput(event) {
@@ -21,7 +39,11 @@ export function AddTaskInput(props) {
             <label >
                 <input name="addTask" type="text" onInput={handleInput} />
             </label>
-            <button onClick={handleAdd}>Add</button>
+            <button onClick={addTaskToJson}>Add</button>
         </div>
     )
 }
+
+
+
+
