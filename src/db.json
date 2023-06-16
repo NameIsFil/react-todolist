@@ -1,14 +1,19 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "title": "Throw away the trash",
-      "status": "ToDo"
+      "title": "Walk the dog",
+      "status": "ToDo",
+      "id": 1
     },
     {
-      "id": 2,
       "title": "Wash the dishes",
-      "status": "Doing"
+      "status": "ToDo",
+      "id": 2
+    },
+    {
+      "title": "Go shopping",
+      "status": "Doing",
+      "id": 3
     }
   ]
 }

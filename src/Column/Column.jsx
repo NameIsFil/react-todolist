@@ -4,63 +4,55 @@ import { Link } from "react-router-dom";
 export function Column(props) {
     const title = props.title;
 
-    function deleteTask(task) {
-        const tasksArray = props.tasksArray;
-        tasksArray.forEach((taskFromArray, index) => {
-            if (task.id === taskFromArray.id) {
-                tasksArray.splice(index, 1);
-                props.setTasksArray([...tasksArray]);
-                return;
-            }
-        })
+    async function removeData(task) {
+        const postResponse = await fetch(`http://localhost:3000/tasks/${task.id}`, {
+            method: 'DELETE'
+        });
+        props.fetchTasks()
+    }
+
+    async function changeStatus(task, taskStatus) {
+        const postResponse = await fetch(`http://localhost:3000/tasks/${task.id}`, {
+            method: 'PATCH',
+            headers: { "Content-Type": "application/json", },
+            body: JSON.stringify({
+                status: taskStatus,
+            }),
+        });
+        props.fetchTasks()
     }
 
     function moveRight(task) {
 
         if(task.status === "ToDo") {
             task.status = "Doing";
-            setTasksArrayHelper(task, props)
+            changeStatus(task, task.status)
             return;
         }
         if(task.status === "Doing") {
             task.status = "Done";
-            setTasksArrayHelper(task, props)
+            changeStatus(task, task.status);
             return;
         }
         if(task.status === "Done") {
-            setTasksArrayHelper(task, props)
             return;
         }
     }
 
     function moveLeft(task) {
         if(task.status === "ToDo") {
-            setTasksArrayHelper(task, props)
             return;
         }
         if(task.status === "Doing") {
             task.status = "ToDo";
-            setTasksArrayHelper(task, props)
+            changeStatus(task, task.status);
             return;
         }
         if(task.status === "Done") {
             task.status = "Doing";
-            setTasksArrayHelper(task, props)
+            changeStatus(task, task.status);
             return;
         }
-    }
-
-    function setTasksArrayHelper(task, props) {
-        let newArray;
-        let tasksArray = props.tasksArray;
-        tasksArray.forEach((taskFromArray) => {
-            if (task.id === taskFromArray.id) {
-                taskFromArray.status = task.status;
-                newArray = tasksArray.slice()
-                props.setTasksArray(newArray);
-                return;
-            }
-        })
     }
 
     return (
@@ -73,7 +65,7 @@ export function Column(props) {
                             {task.title}
                             <div className={styles.buttonBar}>
                                 <button onClick={() => moveLeft(task)}>Move Left</button>
-                                <button onClick={() => deleteTask(task)}>Delete</button>
+                                <button onClick={() => removeData(task)}>Delete</button>
                                 <button onClick={() => moveRight(task)}>Move Right</button>
                                 <Link to={`/details/${task.id}`}>go to details</Link>
                             </div>

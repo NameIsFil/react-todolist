@@ -3,27 +3,12 @@ import { useMemo, useState, useEffect } from 'react';
 import {AddTaskInput} from "../AddTasksInput/AddTasksInput.jsx";
 import * as styles from './styles.module.css';
 
-const initialTasks = [
-    {
-        id: 1,
-        title: "Wash the dishes",
-        status: "ToDo",
-    },
-    {
-        id: 2,
-        title: "Throw away the trash",
-        status: "Doing",
-    }
-]
-
 export function ToDoList() {
-    const [tasksArray, setTasksArray] = useState(initialTasks)
+    const [tasksArray, setTasksArray] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:3000/tasks`)
-            .then(res => res.json())
-            .then(data => setTasksArray(data))
-    }, [tasksArray])
+        fetchTasks()
+    }, [])
 
     const {toDo, doing, done} = useMemo(() => {
         const toDo = [];
@@ -44,15 +29,21 @@ export function ToDoList() {
         return {toDo, doing, done}
     }, [tasksArray])
 
+    async function fetchTasks() {
+        const postResponse = await fetch(`http://localhost:3000/tasks`);
+        const tasksData = await postResponse.json();
+        setTasksArray(tasksData)
+    }
+
     return (
         <div>
             <h1 className={styles.title}>To Do List</h1>
-            <AddTaskInput tasksArray={tasksArray} setTasksArray={setTasksArray}/>
+            <AddTaskInput tasksArray={tasksArray} setTasksArray={setTasksArray} fetchTasks={fetchTasks}/>
             <br />
             <div className={styles.toDoList}>
-                <Column tasksArray={tasksArray} setTasksArray={setTasksArray} title="To Do" tasks={toDo}/>
-                <Column tasksArray={tasksArray} setTasksArray={setTasksArray} title="Doing" tasks={doing}/>
-                <Column tasksArray={tasksArray} setTasksArray={setTasksArray} title="Done" tasks={done}/>
+                <Column tasksArray={tasksArray} setTasksArray={setTasksArray} fetchTasks={fetchTasks} title="To Do" tasks={toDo}/>
+                <Column tasksArray={tasksArray} setTasksArray={setTasksArray} fetchTasks={fetchTasks} title="Doing" tasks={doing}/>
+                <Column tasksArray={tasksArray} setTasksArray={setTasksArray} fetchTasks={fetchTasks} title="Done" tasks={done}/>
             </div>
         </div>
     )
