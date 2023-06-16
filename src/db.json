@@ -7,12 +7,12 @@
     },
     {
       "title": "Wash the dishes",
-      "status": "ToDo",
+      "status": "Doing",
       "id": 2
     },
     {
       "title": "Go shopping",
-      "status": "Doing",
+      "status": "ToDo",
       "id": 3
     }
   ]

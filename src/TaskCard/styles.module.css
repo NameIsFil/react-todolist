@@ -1,0 +1,29 @@
+p {
+    margin-left: 5px;
+    inline-size: 290px;
+    overflow-wrap: break-word;
+}
+
+button {
+    margin-left: 5px;
+}
+
+.buttonBar {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.buttonLink {
+    margin-left: 10px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.taskCard {
+    margin-bottom: 20px;
+}
+
+* {
+    font-family: "Montserrat";
+}
