@@ -7,14 +7,9 @@ export function AddTaskInput(props) {
     async function addTask() {
         const response = await fetch("http://localhost:3000/tasks", {
             method: "POST",
-            mode: "cors",
-            cache: "no-cache",
-            credentials: "same-origin",
             headers: {
                 "Content-Type": "application/json",
             },
-            redirect: "follow",
-            referrerPolicy: "no-referrer",
             body: JSON.stringify({
                 title: inputValue,
                 status: "ToDo",
@@ -30,10 +25,10 @@ export function AddTaskInput(props) {
 
     return (
         <div className={styles.inputBar}>
-            <label >
-                <input name="addTask" type="text" onInput={handleInput} />
+            <label>
+                <input className={styles.inputBox} name="addTask" type="text" onInput={handleInput} type={"text"}/>
+                <input className={styles.inputButton} onClick={addTask} value="Add" type={"submit"} />
             </label>
-            <button onClick={addTask}>Add</button>
         </div>
     )
 }

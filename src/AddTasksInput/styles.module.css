@@ -1,4 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+
 .inputBar {
     display: flex;
     justify-content: center;
+    margin-bottom: 48px;
+}
+
+input {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: .5s;
+}
+
+.inputBox {
+    margin: 0px;
+    width: 352px;
+    padding: 8px 25px;
+    border-radius: 10px 0px 0px 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    outline: none;
+    border:none;
+}
+
+.inputBox:hover {
+    width: 380px;
+    outline: purple;
+    border:purple;
+}
+
+.inputButton {
+    margin: 0px;
+    width: 63px;
+    padding: 10px;
+    border-radius: 0px 10px 10px 0px;
+    background-color: #d64161;
+    color: #f2f2f2;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    outline: none;
+    border:none;
+    cursor: pointer;
+}
+
+.inputButton:hover {
+    background: darkmagenta;
 }

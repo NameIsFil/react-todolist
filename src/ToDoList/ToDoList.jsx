@@ -36,14 +36,26 @@ export function ToDoList() {
     }
 
     return (
-        <div>
-            <h1 className={styles.title}>To Do List</h1>
-            <AddTaskInput tasksArray={tasksArray} setTasksArray={setTasksArray} fetchTasks={fetchTasks}/>
-            <br />
-            <div className={styles.toDoList}>
-                <Column tasksArray={tasksArray} setTasksArray={setTasksArray} fetchTasks={fetchTasks} title="To Do" tasks={toDo}/>
-                <Column tasksArray={tasksArray} setTasksArray={setTasksArray} fetchTasks={fetchTasks} title="Doing" tasks={doing}/>
-                <Column tasksArray={tasksArray} setTasksArray={setTasksArray} fetchTasks={fetchTasks} title="Done" tasks={done}/>
+        <div className={styles.desktopBackground}>
+            <div className={styles.topBar}>
+                <div className={styles.logoBar}>
+                    <div className={styles.logo} />
+                    <div>
+                        <p className={styles.logoText}>TASKMASTER</p>
+                    </div>
+                </div>
+            </div>
+            <div className={styles.bottomBar}>
+                <div className={styles.inputField}>
+                    <h1 className={styles.title}>To Do List</h1>
+                    <div className={styles.line}></div>
+                    <AddTaskInput tasksArray={tasksArray} setTasksArray={setTasksArray} fetchTasks={fetchTasks}/>
+                </div>
+                <div className={styles.toDoList}>
+                    <Column tasksArray={tasksArray} setTasksArray={setTasksArray} fetchTasks={fetchTasks} title="To Do" tasks={toDo}/>
+                    <Column tasksArray={tasksArray} setTasksArray={setTasksArray} fetchTasks={fetchTasks} title="Doing" tasks={doing}/>
+                    <Column tasksArray={tasksArray} setTasksArray={setTasksArray} fetchTasks={fetchTasks} title="Done" tasks={done}/>
+                </div>
             </div>
         </div>
     )

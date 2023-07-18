@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import * as styles from './styles.module.css';
 import {ToDoList} from "./ToDoList/ToDoList.jsx";
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import {Details} from "./Details/Details.jsx";

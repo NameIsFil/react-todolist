@@ -1,5 +1,12 @@
 import * as styles from "./styles.module.css";
 import {Link} from "react-router-dom";
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import AddIcon from '@mui/icons-material/Add';
+import IconButton from '@mui/material/IconButton';
+import { createTheme } from '@mui/material/styles';
+import { purple, pink, grey } from '@mui/material/colors';
 
 export function TaskCard(props) {
     const task = props.task
@@ -55,12 +62,23 @@ export function TaskCard(props) {
 
     return (
         <div className={styles.taskCard} key={task.id}>
-            <p>{task.title}</p>
+            <div className={styles.topBar}>
+                <p>{task.title}</p>
+                <Link className={styles.buttonLink} to={`/details/${task.id}`}>
+                    <AddIcon sx={{ color: grey[100] }} />
+                </Link>
+            </div>
+            <div className={styles.divider} />
             <div className={styles.buttonBar}>
-                <button onClick={() => moveLeft(task)}>Move Left</button>
-                <button onClick={() => removeTask(task)}>Delete</button>
-                <button onClick={() => moveRight(task)}>Move Right</button>
-                <Link className={styles.buttonLink} to={`/details/${task.id}`}>go to details</Link>
+                <IconButton className={styles.buttonLeft} onClick={() => moveLeft(task)}>
+                    <ArrowLeftIcon sx={{ color: grey[100] }} />
+                </IconButton>
+                <IconButton className={styles.buttonTrash} onClick={() => removeTask(task)}>
+                    <HighlightOffIcon sx={{ color: grey[100] }} />
+                </IconButton>
+                <IconButton className={styles.buttonRight} onClick={() => moveRight(task)}>
+                    <ArrowRightIcon sx={{ color: grey[100] }} />
+                </IconButton>
             </div>
         </div>
     )

@@ -1,11 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+
+.desktopBackground {
+    min-height: 100vh;
+    background-color: #141218;
+}
+
 .toDoList {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    width: 100%;
+    justify-content: center;
+}
+
+.topBar {
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.logoBar {
+    display: flex;
+    margin-left: 3%;
+}
+
+.logo {
+    width: 26px;
+    background-image: url("../images/logo.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin-right: 16px;
+}
+
+.logoText {
+    padding: 0px;
+    margin: 0px;
+    font-size: 26px;
+    color: #f2f2f2;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.inputField {
+    margin-top: 78px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .title {
+    color: #f2f2f2;
     display: flex;
     justify-content: center;
+    margin-bottom: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
 }
+
+.line {
+    background-color: #E6E0E9;
+    height: 1px;
+    width: 208px;
+    margin-bottom: 29px;
+}
+
+@media screen and (max-width: 1130px){
+    .toDoList {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
