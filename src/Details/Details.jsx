@@ -1,22 +1,19 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import * as styles from './styles.module.css';
-import AddIcon from "@mui/icons-material/Add.js";
-import {grey} from "@mui/material/colors";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import BackspaceIcon from '@mui/icons-material/Backspace';
 
 export function Details() {
-    const [taskDetails, setTaskDetails] = useState()
+    const [taskDetails, setTaskDetails] = useState(null) // add circular progress from mui (if detail = null, return circular progress)
     const { taskId } = useParams();
+
     async function removeTask() {
         const postResponse = await fetch(`http://localhost:3000/tasks/${taskId}`, {
             method: 'DELETE'
         });
-        fetchTasks()
     }
 
     async function fetchTasks() {
@@ -25,9 +22,11 @@ export function Details() {
         );
         const tasksData = await postResponse.json();
         setTaskDetails(tasksData)
-        console.log(taskDetails)
     }
-    fetchTasks()
+
+    useEffect(() => {
+        fetchTasks()
+    }, [])
 
 
     return (
@@ -48,6 +47,7 @@ export function Details() {
                     <div className={styles.divider}></div>
                     <div className={styles.taskCardContent}>
                         <p>{JSON.stringify(taskDetails)}</p>
+
                     </div>
                     <div className={styles.divider}></div>
                     <div className={styles.buttonBar}>
